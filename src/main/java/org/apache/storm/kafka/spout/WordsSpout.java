@@ -72,8 +72,8 @@ public class WordsSpout {
         final TopologyBuilder tp = new TopologyBuilder();
         tp.setSpout("KafkaSpout", new KafkaSpout<>(newKafkaSpoutConfig()), 1);
 
-        tp.setBolt("PythonSplitBolt", new SplitSentence(), 1).shuffleGrouping("KafkaSpout", TOPIC_0_STREAM);
-        tp.setBolt("StormCountBolt", new WordCountBolt(), 1).fieldsGrouping("PythonSplitBolt", new Fields("word"));
+        tp.setBolt("PathChecjerBolt", new SplitSentence(), 1).shuffleGrouping("KafkaSpout", TOPIC_0_STREAM);
+        tp.setBolt("StormCountBolt", new WordCountBolt(), 1).fieldsGrouping("PathChecjerBolt", new Fields("word"));
 
 
         JedisPoolConfig poolConfig = new JedisPoolConfig.Builder()
